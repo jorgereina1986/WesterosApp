@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jorgereina.westerosapp.R;
 import com.jorgereina.westerosapp.models.Westero;
@@ -25,27 +26,33 @@ public class WesterosAdapter extends RecyclerView.Adapter<WesterosAdapter.ViewHo
     @Override
     public WesterosAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row, parent, false);
-        // set the view's size, margins, paddings and layout parameters
-        ViewHolder viewHolder = new ViewHolder(v);
+        View view = LayoutInflater.from(context).inflate(R.layout.row, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(WesterosAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(WesterosAdapter.ViewHolder holder, final int position) {
 
         Westero westero = westeroList.get(position);
 
         holder.nameTv.setText(westero.getName());
         holder.ratingTv.setText(westero.getAttackerCommander());
         holder.strengthTv.setText(westero.getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, position+"", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return westeroList.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

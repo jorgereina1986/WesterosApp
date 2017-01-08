@@ -6,6 +6,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.jorgereina.westerosapp.R;
 import com.jorgereina.westerosapp.adapters.WesterosAdapter;
@@ -48,7 +50,30 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+
+        clickListener();
     }
+
+    private void clickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+                Toast.makeText(getApplicationContext(), e+"", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
+    }
+
 
     private void networkCall() {
         Retrofit retrofit = new Retrofit.Builder()
