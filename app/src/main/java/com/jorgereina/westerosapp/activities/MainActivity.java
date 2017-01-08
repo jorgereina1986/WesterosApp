@@ -14,6 +14,8 @@ import com.jorgereina.westerosapp.models.Westero;
 import com.jorgereina.westerosapp.service.WesterosApi;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -67,8 +69,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Westero>> call, retrofit2.Response<List<Westero>> response) {
                 Log.d("xxcx", response.body().get(0).getName());
 
+                List<Westero> completeList = new ArrayList<Westero>();
                 westeroList.clear();
                 westeroList.addAll(response.body());
+                sortList(westeroList);
                 adapter.notifyDataSetChanged();
             }
 
@@ -77,5 +81,18 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error: " + t, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void sortList(List<Westero> list){
+        Collections.sort(list, new Comparator<Westero>() {
+            @Override
+            public int compare(Westero westero, Westero t1) {
+                return westero.getAttackerKing().compareTo(t1.getAttackerKing());
+            }
+        });
+    }
+
+    private void clickListener(){
+
     }
 }

@@ -1,6 +1,7 @@
 package com.jorgereina.westerosapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jorgereina.westerosapp.R;
+import com.jorgereina.westerosapp.activities.DetailsActivity;
 import com.jorgereina.westerosapp.models.Westero;
 
 import java.util.List;
@@ -37,13 +39,16 @@ public class WesterosAdapter extends RecyclerView.Adapter<WesterosAdapter.ViewHo
 
         Westero westero = westeroList.get(position);
 
-        holder.nameTv.setText(westero.getName());
+        holder.nameTv.setText(westero.getAttackerKing());
         holder.ratingTv.setText(westero.getAttackerCommander());
         holder.strengthTv.setText(westero.getName());
+        //click listener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, position+"", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
     }
