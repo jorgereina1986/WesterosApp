@@ -1,6 +1,6 @@
 package com.jorgereina.westerosapp.service;
 
-import com.jorgereina.westerosapp.models.Response;
+import com.jorgereina.westerosapp.models.Westero;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ public interface WesterosApi {
 
     //http://starlord.hackerearth.com/gotjson
     @GET("/gotjson")
-    Call<List<Response>> listWesteros();
+    Call<List<Westero>> listWesteros();
 }
